@@ -1,0 +1,20 @@
+[Unit]
+Description=%i Primer - Service
+Requires=teamdrive@%i.service
+After=teamdrive@%i.service
+
+[Service]
+EnvironmentFile=/opt/teamdrives/%i.conf
+User=youruser
+Group=yourgroup
+Type=oneshot
+ExecStartPre=/bin/sleep 10
+ExecStart=/usr/bin/rclone \
+  --config /home/youruser/.config/rclone/rclone.conf \
+  --timeout=1h \
+  -vvv \
+  --rc-addr=localhost:${RCLONE_RC_PORT} \
+  rc vfs/refresh
+
+[Install]
+WantedBy=default.target
