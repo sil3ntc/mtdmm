@@ -142,3 +142,5 @@ sudo systemctl start teamdrive_primer@remotename.service
 sudo systemctl start teamdrive_primer@remotename.timer
 ```
 Once the mounts have been enabled, they should start at boot and the files be available at the `DESTINATION_DIR` specified in the `remotename.conf`.
+
+You're Done!
