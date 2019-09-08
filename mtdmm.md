@@ -16,13 +16,13 @@ To keep things tidy we're going to use a templated service file that refrences a
 
 In these files I have specified the user `youruser` and `yourgroup` in a few places. If you're using a different user and group, make sure to edit those to suit the setup.
 
-```bash
+```sh
 sudo nano /etc/systemd/system/teamdrive@.service
 ``` 
 Create the new file in the location we want it.  Use `sudo` to get over any permission snags. Create the service file as below. 
 
 ##### `teamdrive@.service`
-```
+```sh
 [Unit]
 Description=Rclone VFS
 # Depend on network
@@ -35,7 +35,7 @@ Type=notify
 User=youruser
 Group=yourgroup
 
-# Mount command
+# Mount command - You can add any extra flags you want here
 EnvironmentFile=/opt/teamdrives/%i.conf
 ExecStartPre=-/usr/bin/sudo /bin/mkdir -p $DESTINATION_DIR
 ExecStartPre=-/usr/bin/sudo /bin/chmod -R 775 $DESTINATION_DIR
