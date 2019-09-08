@@ -1,0 +1,48 @@
+[Unit]
+Description=Rclone VFS
+# Depend on network
+After=network-online.target
+# Check directories
+
+[Service]
+Type=notify
+
+User=youruser
+Group=yourgroup
+
+# Mount command - You can add any extra flags you want here
+EnvironmentFile=/opt/teamdrives/%i.conf
+ExecStartPre=-/usr/bin/sudo /bin/mkdir -p $DESTINATION_DIR
+ExecStartPre=-/usr/bin/sudo /bin/chmod -R 775 $DESTINATION_DIR
+ExecStartPre=-/usr/bin/sudo /bin/chown -R youruser:yourgroup $DESTINATION_DIR
+ExecStart=/usr/bin/rclone mount \
+  --config=/home/youruser/.config/rclone/rclone.conf \
+  --allow-other \
+  --fast-list \
+  --rc \
+  --rc-addr=localhost:${RCLONE_RC_PORT} \
+  --drive-skip-gdocs \
+  --vfs-read-chunk-size=64M \
+  --vfs-read-chunk-size-limit=2048M \
+  --buffer-size=64M \
+  --max-read-ahead=256M \
+  --poll-interval=1m \
+  --dir-cache-time=72h \
+  --timeout=10m \
+  --transfers=16 \
+  --checkers=8 \
+  --drive-chunk-size=64M \
+  --umask=002 \
+  --syslog \
+  -vv \
+ $SOURCE_REMOTE $DESTINATION_DIR
+
+# Unmount on stop
+ExecStop=/bin/umount -l $DESTINATION_DIR
+Restart=on-abort
+RestartSec=5
+StartLimitInterval=60s
+StartLimitBurst=3
+
+[Install]
+WantedBy=default.target
