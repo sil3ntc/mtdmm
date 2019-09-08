@@ -1,0 +1,12 @@
+# mtdmm teamdrive_primer@.timer template
+[Unit]
+Description=%i Primer - Timer
+
+[Timer]
+OnUnitInactiveSec=167h
+
+[Install]
+WantedBy=timers.target
+[Service]
+User=youruser
+Group=yourgroup
