@@ -1,9 +1,5 @@
-# g0dm0de
+# Multiple Teamdrive Mounting Method
 
-This is a collection of things i want to be able to use again.
-I'm such a n00b I need to follow the tutorial to work out how to use [github](https://github.com).
-But at least *I* remembered how to use **MARKDOWN**.
+I needed to have multiple teamdrives mounted on my box. I am not a clever man. Some guy in a discord took the time to talk me through it and I'm paying it forward for anyone it helps. 
 
-|Thing|What it Does|Does it work?|
-|------|---|-----|
-|[mtdmm.md](mtdmm.md)|It's a way to mount multiple teamdrives tidily|Yup|
+[mtdmm.md](mtdmm.md)
