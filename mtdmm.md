@@ -2,19 +2,17 @@
 
 #### Introduction
 
-You got multiple teamdrives that you want mounting on your box? This is a guide to get them mounted in the cleanest way possible. I'm not an expert. But some cool guy in a discord took the time to talk me through it so i'm sharing the process, in case anyone else had some trouble mounting their teamdrives.
+You got multiple rclone teamdrive remotes that you want mounting on your box? This is a method to get them mounted in the cleanest way possible. I'm not an expert. But some super cool guy in a discord took the time to talk me through it so I'm sharing the process, in case anyone else had the same trouble I did mounting their teamdrives.
 
 Rather than making multiple `.service` files for each mount, it's possible to make a template service file and feed it a config file. This method makes the process a lot more user friendly and requires only a 3 line `.config` file for each remote we want mounted.
 
 #### Assumptions
 
-This document assumes that the remotes you want to mount have already been setup with `rclone config`. Where I use `remotename` this is the name of the remote you set up in rclone. Use some common sense. This is **NOT** a copy & paste guide.
+This document assumes that the remotes you want to mount have already been setup with `rclone config` and you are able to get an output from `rclone lsd remotename:`. Where I use `remotename` this is the name of the remote you set up in rclone. Use some common sense. This is **NOT** a copy & paste guide. I did this on an Ubuntu box, with the latest version of rclone. In these examples I have specified the user:group as `youruser` and `yourgroup` in a few places. If you're using a different user and group, make sure to edit those to suit the setup.
 
 #### Service File Templates
 
-To keep things tidy we're going to use a templated service file that refrences a `.config` file. Its a much tidier way of doing it. The files are going to sit in `/etc/systemd/system/`. Then we need to make a directory `/opt/teamdrives` that will hold our enviroment files.
-
-In these files I have specified the user `youruser` and `yourgroup` in a few places. If you're using a different user and group, make sure to edit those to suit the setup.
+To keep things tidy we're going to use a templated service file that refrences a `.config` file. Its a much tidier way of doing it. The service files are going to sit in `/etc/systemd/system/`. The `.config` files will live in `/opt/teamdrives`.
 
 ```sh
 sudo nano /etc/systemd/system/teamdrive@.service
