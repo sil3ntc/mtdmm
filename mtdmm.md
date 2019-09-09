@@ -14,12 +14,13 @@ This document assumes that the remotes you want to mount have already been setup
 
 To keep things tidy we're going to use a templated service file that refrences a `.config` file. Its a much tidier way of doing it. The service files are going to sit in `/etc/systemd/system/`. The `.config` files will live in `/opt/teamdrives`.
 
+#### `teamdrive@.service`
+
 ```sh
 sudo nano /etc/systemd/system/teamdrive@.service
 ``` 
 Create the new file in the location we want it.  Use `sudo` to get over any permission snags. Create the service file as below. 
 
-##### `teamdrive@.service`
 ```sh
 [Unit]
 Description=Rclone VFS
@@ -72,9 +73,10 @@ WantedBy=default.target
 ```
 `ctrl+x` then `y` and `enter` to exit and save.
 
+#### `teamdrive_primer@.service`
+
 `sudo nano /etc/systemd/system/teamdrive_primer@.service` to create the new file in the location we want it. Use `sudo` to get over any permission snags. Then create service primer as below.
 
-##### `teamdrive_primer@.service`
 ```
 [Unit]
 Description=%i Primer - Service
@@ -98,9 +100,12 @@ ExecStart=/usr/bin/rclone \
 WantedBy=default.target
 ```
 `ctrl+x` then `y` and `enter` to exit and save.
+
+
+#### `teamdrive_primer@.timer`
+
 `sudo nano /etc/systemd/system/teamdrive_primer@.timer` To create the new file in the location we want it. Use `sudo` to get over any permission snags. Then paste in the following.
 
-##### `teamdrive_primer@.timer`
 ```
 [Unit]
 Description=%i Primer - Timer
