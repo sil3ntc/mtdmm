@@ -8,7 +8,7 @@ Rather than making multiple `.service` files for each mount, it's possible to ma
 
 #### Assumptions
 
-This document assumes that the remotes you want to mount have already been setup with `rclone config` and you are able to get an output from `rclone lsd remotename:`. Where I use `remotename` this is the name of the remote you set up in rclone. Use some common sense. This is **NOT** a copy & paste guide. I did this on an Ubuntu box, with the latest version of rclone. In these examples I have specified the user:group as `youruser` and `yourgroup` in a few places. If you're using a different user and group, make sure to edit those to suit the setup.
+This document assumes that the remotes you want to mount have already been setup with `rclone config` and you are able to get an output from `rclone lsd remotename:`. Where I use `remotename`, this is the name of the remote you set up in rclone. Use some common sense. This is **NOT** a copy & paste guide. I did this on an Ubuntu box, with the latest version of rclone. In these examples I have specified the user:group as `youruser` and `yourgroup` in a few places. If you're using a different user and group, make sure to edit those to suit the setup. I use it on [cloudbox](https://cloudbox.works), but not as an upload location. That's a whole other can of worms.
 
 #### Service File Templates
 
@@ -77,7 +77,7 @@ WantedBy=default.target
 
 `sudo nano /etc/systemd/system/teamdrive_primer@.service` to create the new file in the location we want it. Use `sudo` to get over any permission snags. Then create service primer as below.
 
-```
+```sh
 [Unit]
 Description=%i Primer - Service
 Requires=teamdrive@%i.service
@@ -106,7 +106,7 @@ WantedBy=default.target
 
 `sudo nano /etc/systemd/system/teamdrive_primer@.timer` To create the new file in the location we want it. Use `sudo` to get over any permission snags. Then paste in the following.
 
-```
+```sh
 [Unit]
 Description=%i Primer - Timer
 
